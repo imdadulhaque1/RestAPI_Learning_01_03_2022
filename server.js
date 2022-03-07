@@ -20,11 +20,6 @@ app.get('/api/contacts', (req, res) =>{
     res.json(contacts);
 })
 
-app.post('/api/contacts', (req, res) =>{
-    res.send({
-        "message": "Hello, Mr. Imdadul Haque. Have a message for you."
-    })
-})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>{
