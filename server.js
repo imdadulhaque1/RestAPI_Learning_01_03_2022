@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
+const cors = require('cors');
 const app = express();
 
 const contactRoute = require('./api/routes/contacts.js');
@@ -9,7 +10,7 @@ const postRoute = require('./api/routes/post.js');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-
+app.use(cors());
 
 
 // ------------> Routing Starting
@@ -22,7 +23,7 @@ app.use('/api/post', postRoute);
 //     console.log("I am a Middleware function!");
 //     next();
 // })
-
+ 
 app.get('/', (req,res) =>{
     res.send("Express Home page!");
 })
