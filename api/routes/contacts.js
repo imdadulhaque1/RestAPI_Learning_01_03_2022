@@ -10,8 +10,14 @@ router.get('/', (req, res, next) =>{
 })
 
 router.post('/', (req, res, next) =>{
+    const name = req.body.name;
+    const email = req.body.email;
+    const message = req.body.message;
     res.status(201).json({
-        message: "Hello, this is post from contact router!"
+        // message: "Hello, this is post from contact router!",
+        name,
+        email,
+        message
     })
 })
 
@@ -19,7 +25,7 @@ router.post('/', (req, res, next) =>{
 //     // console.log(req.url); 
 //     const id = req.params.id
 //     res.json({
-//         id: id
+//         id: id'/
 //     })
 // })
 
