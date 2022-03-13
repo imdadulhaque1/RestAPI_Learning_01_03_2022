@@ -3,21 +3,28 @@ const express = require("express");
 const router = express.Router();
 
 
+const contacts = [];
+
 router.get('/', (req, res, next) =>{
-    res.send({
-        "message": "Hello, Mr. Imdadul Haque. Have a message for you from contact api."
+    res.status(200).json({
+        contacts
     })
 })
 
 router.post('/', (req, res, next) =>{
-    const name = req.body.name;
-    const email = req.body.email;
-    const message = req.body.message;
+    // const name = req.body.name;
+    // const email = req.body.email;
+    // const message = req.body.message;
+    // console.log(`Name: ${name}, Email: ${email}, Message: ${message}`);
+    contacts.push({
+        name: req.body.name,
+        email: req.body.email
+    })
     res.status(201).json({
-        // message: "Hello, this is post from contact router!",
-        name,
-        email,
-        message
+        message: "Data Saved!",
+        // name,
+        // email,
+        // message
     })
 })
 
