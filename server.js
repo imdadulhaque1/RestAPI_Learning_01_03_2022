@@ -1,8 +1,12 @@
 const express = require('express');
+const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
 const cors = require('cors');
-const app = express();
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/contacts-db');
+
+
 
 const contactRoute = require('./api/routes/contacts.js');
 const postRoute = require('./api/routes/post.js');
@@ -17,6 +21,18 @@ app.use(cors());
 app.use('/api/contacts', contactRoute)
 app.use('/api/post', postRoute);
 // ------------> Routing Ended
+
+// ------------> Starting Database connection & check
+const db = mongoose.connection;
+db.on('error', (err) =>{
+    console.log(err);
+})
+db.once('open', () =>{
+    console.log("Database Connection Established!");
+})
+
+// ------------> Ending Database connection & check
+
 
 // -----------> use of Middleware
 // app.use((req, res, next) =>{
