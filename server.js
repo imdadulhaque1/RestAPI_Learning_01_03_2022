@@ -22,7 +22,7 @@ app.use('/api/contacts', contactRoute)
 app.use('/api/post', postRoute);
 // ------------> Routing Ended
 
-// ------------> Starting Database connection & check
+// ------------> Starting MongoDB Database connection & check
 const db = mongoose.connection;
 db.on('error', (err) =>{
     console.log(err);
@@ -30,19 +30,54 @@ db.on('error', (err) =>{
 db.once('open', () =>{
     console.log("Database Connection Established!");
 })
-
-// ------------> Ending Database connection & check
-
+// ------------> Ending MongoDB Database connection & check
+const Schema = mongoose.Schema;
+const demoSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+        minlength: 5
+    },
+    phone: {
+        type: String,
+        required: true,
+        minlength: 8
+    }
+})
+const Demo = mongoose.model('Demo', demoSchema);
 
 // -----------> use of Middleware
 // app.use((req, res, next) =>{
 //     console.log("I am a Middleware function!");
 //     next();
 // })
- 
+
+app.get('/demo', (req,res)=>{
+    const demo = new Demo({
+        name: "Enamul Haque",
+        phone: "01773964101"
+    })
+    demo.save()
+        .then(data => {
+            res.json({data})
+        })
+        .catch(err => console.log(err))
+})
+
+app.get('/show-data', (req, res) =>{
+    Demo.find()
+        .then(data =>{
+            res.json(data);
+        })
+        .catch(err => console.log(err))
+})
+
+
+
 app.get('/', (req,res) =>{
     res.send("Express Home page!");
 })
+
 
 app.get('/post', (req, res) =>{
     res.send("Posted Here!")
