@@ -23,10 +23,6 @@ router.put('/:id', (req, res, next) =>{
         message: "I am Put Route."
     })
 })
-router.delete('/:id', (req, res, next) =>{
-    res.json({
-        message: "I am Delete Route."
-    })
-})
+router.delete('/:id', contactController.deleteSingleContact);
 
 module.exports = router;

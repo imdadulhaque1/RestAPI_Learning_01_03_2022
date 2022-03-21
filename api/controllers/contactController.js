@@ -58,8 +58,27 @@ const getSingleContact = (req, res, next) =>{
         })
 }
 
+// ------> Delete single contact using id
+const deleteSingleContact = (req, res, next) =>{
+    let id = req.params.id;
+    ContactModel.findByIdAndRemove(id)
+        .then(data =>{
+            res.status(200).json({
+                message: "Contact Deleted!",
+                deleteContact: data
+            })
+        })
+        .catch(err =>{
+            res.status(500).json({
+                message: "Error Occured!",
+                error: err
+            })
+        })
+}
+
 module.exports = {
     getAllContactsController,
     postNewContactController,
-    getSingleContact
+    getSingleContact,
+    deleteSingleContact
 }
