@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const valid = require(validator);
+const valid = require('validator');
 const Schema = mongoose.Schema;
 
 const ContactSchema = new Schema({
@@ -18,7 +18,7 @@ const ContactSchema = new Schema({
             validator: (v) =>{
                 return valid.isMobilePhone(v);
             },
-            message: `${value} is not a valid Phone number.`
+            message: `{VALUE} is not a valid Phone number.`
         }
     },
     email:{
@@ -28,7 +28,7 @@ const ContactSchema = new Schema({
             validator: (v) => {
                 return valid.isEmail(v);
             },
-            message: `${value} is not an email!`
+            message: `{VALUE} is not an email!`
         }
     }
 })
