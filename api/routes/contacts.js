@@ -13,16 +13,10 @@ router.post('/', contactController.postNewContactController )
 // ------> Get single contact
 router.get('/:id', contactController.getSingleContact)
 
-router.post('/:id', (req, res, next) =>{
-    res.json({
-        message: "I am Post Route."
-    })
-})
-router.put('/:id', (req, res, next) =>{
-    res.json({
-        message: "I am Put Route."
-    })
-})
+// ------> Edit single contact
+router.put('/:id', contactController.editSingleContact)
+
+// ------> Delete single contact
 router.delete('/:id', contactController.deleteSingleContact);
 
 module.exports = router;

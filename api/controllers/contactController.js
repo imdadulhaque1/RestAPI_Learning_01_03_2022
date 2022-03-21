@@ -1,3 +1,4 @@
+const res = require("express/lib/response");
 const ContactModel = require("../models/ContactModel");
 
 const getAllContactsController = (req, res, next) =>{
@@ -76,9 +77,35 @@ const deleteSingleContact = (req, res, next) =>{
         })
 }
 
+// ------> Delete single contact using id
+const editSingleContact = (req, res, next) =>{
+    let id = req.params.id;
+    
+    let updatedContact = {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email
+    }
+    ContactModel.findByIdAndUpdate(id, {$set: updatedContact})
+        .then(data =>{
+            res.status(200).json({
+                message: "Successfully data editted!",
+                editedData: data
+            })
+        })
+        .catch(err =>{
+            res.status(500).json({
+                message: "Error Occured!",
+                error: err
+            })
+        })
+}
+
+
 module.exports = {
     getAllContactsController,
     postNewContactController,
     getSingleContact,
-    deleteSingleContact
+    deleteSingleContact,
+    editSingleContact
 }
