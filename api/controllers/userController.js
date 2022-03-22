@@ -9,10 +9,25 @@ const registerController = (req, res, next) =>{
                 error: err
             })
         }
-        res.json({
-            hash,
-            original: req.body.password,
+        let user = new User({
+            name: req.body.name,
+            phone: req.body.phone,
+            email: req.body.email,
+            password: hash
         })
+        user.save()
+            .then(data =>{
+                res.status(201).json({
+                    message: "User Successfully Registered!",
+                    userInfo: data
+                })
+            })
+            .catch(err =>{
+                res.status(500).json({
+                    message: "Error Occured!",
+                    error: err
+                })
+            })
     })
 }
 
