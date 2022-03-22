@@ -1,4 +1,3 @@
-const res = require("express/lib/response");
 const ContactModel = require("../models/ContactModel");
 
 const getAllContactsController = (req, res, next) =>{

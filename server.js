@@ -10,6 +10,8 @@ mongoose.connect('mongodb://localhost/contacts-db');
 
 const contactRoute = require('./api/routes/contacts.js');
 const postRoute = require('./api/routes/post.js');
+const userRoute = require('./api/routes/userRoute.js');
+
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -18,8 +20,9 @@ app.use(cors());
 
 
 // ------------> Routing Starting
-app.use('/api/contacts', contactRoute)
+app.use('/api/contacts', contactRoute);
 app.use('/api/post', postRoute);
+app.use('/api/users', userRoute);
 // ------------> Routing Ended
 
 // ------------> Starting MongoDB Database connection & check
