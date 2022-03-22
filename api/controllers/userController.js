@@ -31,6 +31,24 @@ const registerController = (req, res, next) =>{
     })
 }
 
+const getAllUser = (req, res, next) =>{
+    User.find()
+        .then(data =>{
+            res.status(200).json({
+                message: "Successfully, Showed user list!",
+                UserList: data
+            })
+        })
+        .catch(err =>{
+            res.status(500).json({
+                message: "Error Occured!",
+                error: err
+            })
+        })
+}
+
+
 module.exports ={
-    registerController
+    registerController,
+    getAllUser
 }

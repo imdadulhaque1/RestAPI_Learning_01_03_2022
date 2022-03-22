@@ -8,8 +8,6 @@ router.post('/login', (req, res, next) =>{
     
 })
 
-router.get('/list', (req, res, next) =>{
-    
-})
+router.get('/list', userController.getAllUser)
 
 module.exports = router;
